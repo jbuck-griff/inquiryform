@@ -18,11 +18,10 @@
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: relative;
     }
     h2 {
-      margin-top: 0;
       text-align: center;
+      margin-top: 0;
     }
     label {
       display: block;
@@ -37,9 +36,7 @@
       font-size: 16px;
       box-sizing: border-box;
     }
-    textarea {
-      resize: vertical;
-    }
+    textarea { resize: vertical; }
     button {
       margin-top: 20px;
       width: 100%;
@@ -51,30 +48,18 @@
       font-size: 18px;
       cursor: pointer;
     }
-    button:hover {
-      background: #1f54b6;
-    }
-    .success-message {
-      display: none;
-      padding: 12px;
-      background: #d4ffd8;
-      border: 1px solid #5bbf62;
-      margin-top: 20px;
-      border-radius: 6px;
-      text-align: center;
-    }
+    button:hover { background: #1f54b6; }
     .remove-btn {
       background: #dc3545;
       margin-top: 10px;
     }
-    .remove-btn:hover {
-      background: #b02a37;
-    }
+    .remove-btn:hover { background: #b02a37; }
+    .product-item { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <form id="orderForm" action="https://formsubmit.co/jbuck@paperandfilm.com" method="POST">
+    <form action="https://formsubmit.co/jbuck@paperandfilm.com" method="POST" onsubmit="prepareProducts()">
       <input type="hidden" name="_subject" value="New Order Submitted!">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -82,22 +67,21 @@
       <h2>Place an Order</h2>
 
       <label for="customerName">Your Name</label>
-      <input type="text" name="name" id="customerName" placeholder="Enter your name" required />
+      <input type="text" id="customerName" name="name" placeholder="Enter your name" required />
 
       <label for="email">Email</label>
-      <input type="email" name="email" id="email" placeholder="Enter your email" required />
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
 
       <label for="phone">Phone Number</label>
-      <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" />
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" />
 
       <div id="products">
         <div class="product-item">
           <h3>Product 1</h3>
 
           <label>Pattern</label>
-          <select name="pattern[]" class="pattern">
-            <option value="">Pattern</option>
-            <!-- All pattern options here -->
+          <select name="pattern[]" class="pattern" required>
+            <option value="">Select Pattern</option>
             <option>AURORA</option>
             <option>CARBON FIBER I</option>
             <option>CARBON FIBER II</option>
@@ -107,7 +91,7 @@
             <option>EASY COLOR</option>
             <option>FANTASY HOLO BUBBLES</option>
             <option>FANTASY CRYSTAL</option>
-            <option>FANTASY HOLO GLITTER (BELT)</option>
+            <option>FANTASY HOLO GLITTER</option>
             <option>FANTASY HOLO SEQUINS</option>
             <option>FANTASY LIGHT RAYS</option>
             <option>FANTASY MOSAIC 1/4"</option>
@@ -133,9 +117,8 @@
           </select>
 
           <label>Color</label>
-          <select name="color[]" class="color">
-            <option value="">Color</option>
-            <!-- All color options here -->
+          <select name="color[]" class="color" required>
+            <option value="">Select Color</option>
             <option>CLEAR</option>
             <option>SILVER</option>
             <option>WHITE</option>
@@ -167,23 +150,23 @@
           </select>
 
           <label>Adhesive</label>
-          <select name="adhesive[]" class="adhesive">
-            <option value="">Adhesive</option>
+          <select name="adhesive[]" class="adhesive" required>
+            <option value="">Select Adhesive</option>
             <option>Permanent</option>
             <option>Removable</option>
           </select>
 
           <label>Metallization</label>
-          <select name="metallization[]" class="metallization">
-            <option value="">Metallization</option>
+          <select name="metallization[]" class="metallization" required>
+            <option value="">Select Metallization</option>
             <option>Opaque</option>
             <option>Metallized</option>
             <option>Transparent</option>
           </select>
 
           <label>Size</label>
-          <select name="size[]" class="size">
-            <option value="">Size</option>
+          <select name="size[]" class="size" required>
+            <option value="">Select Size</option>
             <option>24"x30'</option>
             <option>24"x75'</option>
             <option>24"x150'</option>
@@ -192,7 +175,7 @@
           </select>
 
           <label>Quantity</label>
-          <input type="number" name="quantity[]" class="quantity" min="1" value="1" />
+          <input type="number" name="quantity[]" class="quantity" min="1" value="1" required />
 
           <button type="button" class="remove-btn" onclick="removeProduct(this)">Remove Product</button>
         </div>
@@ -201,11 +184,9 @@
       <button type="button" onclick="addProduct()" style="margin-top: 20px; background:#28a745;">+ Add Another Product</button>
 
       <label for="notes">Comments</label>
-      <textarea name="notes" id="notes" rows="4" placeholder="Any additional details..."></textarea>
+      <textarea id="notes" name="notes" rows="4" placeholder="Any additional details..."></textarea>
 
       <button type="submit">Submit Order</button>
-
-      <div class="success-message" id="success">Your order has been submitted! We'll contact you shortly.</div>
     </form>
   </div>
 
@@ -217,43 +198,23 @@
       const original = document.querySelector('.product-item');
       const clone = original.cloneNode(true);
       clone.querySelector('h3').textContent = `Product ${productCount}`;
-      clone.querySelectorAll('select').forEach(sel => sel.value = '');
-      clone.querySelectorAll('input').forEach(inp => inp.value = inp.type === 'number' ? 1 : '');
+      clone.querySelectorAll('select, input').forEach(el => {
+        if (el.type === "number") el.value = 1;
+        else el.value = "";
+      });
       document.getElementById('products').appendChild(clone);
     }
 
     function removeProduct(button) {
       const container = document.getElementById('products');
-      if(container.children.length > 1) {
-        button.parentElement.remove();
-      } else {
-        alert('You must have at least one product.');
-      }
+      if (container.children.length > 1) button.parentElement.remove();
+      else alert('You must have at least one product.');
     }
 
-    // Show success message on submission
-    const form = document.getElementById('orderForm');
-    form.addEventListener('submit', function(e){
-      e.preventDefault(); // prevent default redirect
-      const success = document.getElementById('success');
-      success.style.display = 'block';
-      
-      // send form via fetch to FormSubmit
-      const formData = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if(response.ok){
-          form.reset();
-          productCount = 1;
-          document.getElementById('products').innerHTML = form.querySelector('.product-item').outerHTML;
-        }
-      });
-    });
+    // Prepare product data to make sure FormSubmit picks up all array fields
+    function prepareProducts() {
+      // Nothing else needed; all inputs now have proper name="field[]"
+    }
   </script>
 </body>
 </html>
