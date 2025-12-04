@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Griff Decorative Film – Order Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2d6cdf;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1f54b6;
+    }
+    .success-message {
+      display: none;
+      padding: 12px;
+      background: #d4ffd8;
+      border: 1px solid #5bbf62;
+      margin-top: 20px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .remove-btn {
+      background: #dc3545;
+      margin-top: 10px;
+    }
+    .remove-btn:hover {
+      background: #b02a37;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="orderForm" action="https://formsubmit.co/jbuck@paperandfilm.com" method="POST">
+      <input type="hidden" name="_subject" value="New Order Submitted!">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+
+      <h2>Place an Order</h2>
+
+      <label for="customerName">Your Name</label>
+      <input type="text" name="name" id="customerName" placeholder="Enter your name" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Enter your email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" />
+
+      <div id="products">
+        <div class="product-item">
+          <h3>Product 1</h3>
+
+          <label>Pattern</label>
+          <select name="pattern[]" class="pattern">
+            <option value="">Pattern</option>
+            <!-- All pattern options here -->
+            <option>AURORA</option>
+            <option>CARBON FIBER I</option>
+            <option>CARBON FIBER II</option>
+            <option>DIAMOND PLATE CLASSIC</option>
+            <option>DIAMOND PLATE MINI</option>
+            <option>DIAMOND PLATE MINI HOLOGRAPHIC</option>
+            <option>EASY COLOR</option>
+            <option>FANTASY HOLO BUBBLES</option>
+            <option>FANTASY CRYSTAL</option>
+            <option>FANTASY HOLO GLITTER (BELT)</option>
+            <option>FANTASY HOLO SEQUINS</option>
+            <option>FANTASY LIGHT RAYS</option>
+            <option>FANTASY MOSAIC 1/4"</option>
+            <option>FANTASY PLAID GRIFF</option>
+            <option>FANTASY PARTICAL MICRO</option>
+            <option>FANTASY RAINBOW</option>
+            <option>GRIFF CHALK</option>
+            <option>GRIFF ERASE</option>
+            <option>MIRROR LENS 1-3/8" (34MM)</option>
+            <option>MYSTIQUE (BLUE)</option>
+            <option>MYSTIQUE (RED)</option>
+            <option>OPAQUE FILM</option>
+            <option>POLYCHROME TEXT. LG. ENGINE TURN</option>
+            <option>PROFILE LENS LENTICULAR</option>
+            <option>POLYCHROME POLISH</option>
+            <option>POLYCHROME TEXT. SATIN</option>
+            <option>POLYCHROME TEXT. SM. ENGINE TURN</option>
+            <option>POLYCHROME TEXT FINE BRUSH</option>
+            <option>POLYCHROME TEXT. GALVANIZED</option>
+            <option>POLYCHROME TEXT. LEAF</option>
+            <option>POLYCHROME TEXT. TWINKLE HEARTS</option>
+            <option>POLYCHROME TEXT. CHAMPAGNE</option>
+          </select>
+
+          <label>Color</label>
+          <select name="color[]" class="color">
+            <option value="">Color</option>
+            <!-- All color options here -->
+            <option>CLEAR</option>
+            <option>SILVER</option>
+            <option>WHITE</option>
+            <option>BLACK</option>
+            <option>GOLD</option>
+            <option>FLO YELLOW</option>
+            <option>BRASS</option>
+            <option>PURPLE</option>
+            <option>ORANGE</option>
+            <option>PINK</option>
+            <option>COPPER</option>
+            <option>CHERRY RED</option>
+            <option>VIOLET</option>
+            <option>FLO PINK</option>
+            <option>AMETHYST</option>
+            <option>RASPBERRY</option>
+            <option>SKY BLUE</option>
+            <option>ROYAL BLUE</option>
+            <option>EM. GREEN</option>
+            <option>FLO GREEN</option>
+            <option>FLO BLUE</option>
+            <option>FLO ORANGE</option>
+            <option>FLO RED</option>
+            <option>GUN METAL</option>
+            <option>BRONZE</option>
+            <option>RAINBOW IRIS</option>
+            <option>BURGUNDY</option>
+            <option>TEAL</option>
+          </select>
+
+          <label>Adhesive</label>
+          <select name="adhesive[]" class="adhesive">
+            <option value="">Adhesive</option>
+            <option>Permanent</option>
+            <option>Removable</option>
+          </select>
+
+          <label>Metallization</label>
+          <select name="metallization[]" class="metallization">
+            <option value="">Metallization</option>
+            <option>Opaque</option>
+            <option>Metallized</option>
+            <option>Transparent</option>
+          </select>
+
+          <label>Size</label>
+          <select name="size[]" class="size">
+            <option value="">Size</option>
+            <option>24"x30'</option>
+            <option>24"x75'</option>
+            <option>24"x150'</option>
+            <option>24"x300'</option>
+            <option>Custom</option>
+          </select>
+
+          <label>Quantity</label>
+          <input type="number" name="quantity[]" class="quantity" min="1" value="1" />
+
+          <button type="button" class="remove-btn" onclick="removeProduct(this)">Remove Product</button>
+        </div>
+      </div>
+
+      <button type="button" onclick="addProduct()" style="margin-top: 20px; background:#28a745;">+ Add Another Product</button>
+
+      <label for="notes">Comments</label>
+      <textarea name="notes" id="notes" rows="4" placeholder="Any additional details..."></textarea>
+
+      <button type="submit">Submit Order</button>
+
+      <div class="success-message" id="success">Your order has been submitted! We'll contact you shortly.</div>
+    </form>
+  </div>
+
+  <script>
+    let productCount = 1;
+
+    function addProduct() {
+      productCount++;
+      const original = document.querySelector('.product-item');
+      const clone = original.cloneNode(true);
+      clone.querySelector('h3').textContent = `Product ${productCount}`;
+      clone.querySelectorAll('select').forEach(sel => sel.value = '');
+      clone.querySelectorAll('input').forEach(inp => inp.value = inp.type === 'number' ? 1 : '');
+      document.getElementById('products').appendChild(clone);
+    }
+
+    function removeProduct(button) {
+      const container = document.getElementById('products');
+      if(container.children.length > 1) {
+        button.parentElement.remove();
+      } else {
+        alert('You must have at least one product.');
+      }
+    }
+
+    // Show success message on submission
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', function(e){
+      e.preventDefault(); // prevent default redirect
+      const success = document.getElementById('success');
+      success.style.display = 'block';
+      
+      // send form via fetch to FormSubmit
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if(response.ok){
+          form.reset();
+          productCount = 1;
+          document.getElementById('products').innerHTML = form.querySelector('.product-item').outerHTML;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
